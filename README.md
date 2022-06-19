@@ -1,2 +1,2 @@
-# Kotlin-Utils
-Utilities, helpers and companions for Jetpack Compose on Android
+# ComposeKTX
+A collection of utilities, helpers and companions for Jetpack Compose
