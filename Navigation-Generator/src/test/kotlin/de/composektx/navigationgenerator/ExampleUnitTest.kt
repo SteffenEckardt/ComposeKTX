@@ -1,4 +1,4 @@
-package de.se.composektx
+package de.se.navigationgenerator
 
 import org.junit.Test
 
