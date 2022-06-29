@@ -1,4 +1,4 @@
-package de.se.navigationgenerator
+package composektx.navigationgenerator.annotation
 
 import org.junit.Test
 

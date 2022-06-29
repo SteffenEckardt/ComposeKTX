@@ -9,3 +9,5 @@ pluginManagement {
 rootProject.name = "ComposeKTX"
 include ':demoApp'
 include ':navigationGenerator'
+include ':navigationGenerator:annotation'
+include ':navigationGenerator:processor'

@@ -7,15 +7,12 @@ import de.composektx.demoapp.ui.navigation.NavigationDestination
 import de.composektx.demoapp.ui.navigation.NavigationDestination.HomeDestination
 
 @Composable
-@Destination("Details", true)
 fun DetailScreen(navHostController: NavHostController, elementId: Int) = TemplateScreen(
     title = "Detail ($elementId)",
     navController = navHostController,
     navigationDestinationTitle = "Home",
     navigationDestination = HomeDestination
 )
-
-annotation class Destination(val name: String = "", val useNavigationDefaults: Boolean = false)
 
 /**
  * @author Generated
