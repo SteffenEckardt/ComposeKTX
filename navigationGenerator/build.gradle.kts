@@ -1,12 +1,6 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
-    id("com.google.devtools.ksp")
-}
-
-ksp {
-    arg("autoserviceKsp.verify", "true")
-    arg("autoserviceKsp.verbose", "true")
 }
 
 android {
@@ -15,7 +9,7 @@ android {
 
     defaultConfig {
         minSdk = 25
-        targetSdk =32
+        targetSdk = 32
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -37,7 +31,6 @@ android {
 }
 
 dependencies {
-
     implementation("com.squareup:kotlinpoet:1.11.0")
     implementation("com.squareup:kotlinpoet-ksp:1.11.0")
     implementation("com.google.devtools.ksp:symbol-processing-api:1.6.21-1.0.5")
