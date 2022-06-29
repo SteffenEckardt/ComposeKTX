@@ -46,6 +46,11 @@ dependencies {
     implementation("com.google.auto.service:auto-service-annotations:1.0.1")
 
     ksp("dev.zacweers.autoservice.auto-service-ksp:1.0.0")
+
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:1.4.32")
+    testImplementation("com.github.tschuchortdev:kotlin-compile-testing:1.4.8")
+    testImplementation("com.github.tschuchortdev:kotlin-compile-testing-ksp:1.4.8")
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
