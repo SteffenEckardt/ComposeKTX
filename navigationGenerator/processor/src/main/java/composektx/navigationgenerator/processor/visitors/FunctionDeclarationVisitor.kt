@@ -11,6 +11,6 @@ class FunctionDeclarationVisitor : KSEmptyVisitor<Unit, String>() {
         }
 
         override fun visitFunctionDeclaration(function: KSFunctionDeclaration, data: Unit): String {
-            return function.qualifiedName.toString()
+            return function.simpleName.asString()
         }
     }

@@ -23,7 +23,9 @@ class DestinationAnnotationProcessor(
         val unableToProcess = symbolsWithAnnotation.filterNot { it.validate() }
 
         val functionNames = symbolsWithAnnotation
-            .filter { it is KSFunctionDeclaration && it.validate() }
+            .filter {
+                isValidComposeFunctionDeclaration(it)
+            }
             .map { it.accept(FunctionDeclarationVisitor(), Unit) }
 
         functionNames.forEach {
@@ -31,6 +33,12 @@ class DestinationAnnotationProcessor(
         }
 
         return unableToProcess.toList()
+    }
+
+    private fun isValidComposeFunctionDeclaration(ksAnnotated: KSAnnotated): Boolean {
+        return ksAnnotated is KSFunctionDeclaration
+                && ksAnnotated.validate()
+                //&& ksAnnotated.annotations.any { it.shortName == "Composable" } // TODO: Check, if function is compose function
     }
 
 }

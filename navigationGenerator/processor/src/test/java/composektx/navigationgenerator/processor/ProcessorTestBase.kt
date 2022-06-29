@@ -3,7 +3,7 @@ package composektx.navigationgenerator.processor
 import com.tschuchort.compiletesting.KotlinCompilation
 import com.tschuchort.compiletesting.SourceFile
 import com.tschuchort.compiletesting.symbolProcessorProviders
-import de.itkl.providers.StateAnnotationProcessorProvider
+import composektx.navigationgenerator.processor.provider.DestinationAnnotationProcessorProvider
 import org.intellij.lang.annotations.Language
 import org.junit.Assert
 import org.junit.Rule
@@ -18,7 +18,7 @@ abstract class ProcessorTestBase {
 
     protected fun compile(vararg source: SourceFile) = KotlinCompilation().apply {
         sources = source.toList()
-        symbolProcessorProviders = listOf(StateAnnotationProcessorProvider())
+        symbolProcessorProviders = listOf(DestinationAnnotationProcessorProvider())
         workingDir = temporaryFolder.root
         inheritClassPath = true
         verbose = true
@@ -31,11 +31,10 @@ abstract class ProcessorTestBase {
         Assert.assertEquals(cleanExpected, cleanActual)
     }
 
-    protected fun KotlinCompilation.Result.sourceFor(fileName: String): String {
-        return kspGeneratedSources().find { it.name == fileName }
-            ?.readText()
-            ?: throw IllegalArgumentException("Could not find file $fileName in ${kspGeneratedSources()}")
-    }
+    protected fun KotlinCompilation.Result.sourceFor(fileName: String) = kspGeneratedSources()
+        .find { it.name == fileName }
+        ?.readText()
+        ?: throw IllegalArgumentException("Could not find file $fileName in ${kspGeneratedSources()}")
 
     private fun KotlinCompilation.Result.kspGeneratedSources(): List<File> {
         val kspWorkingDir = workingDir.resolve("ksp")
