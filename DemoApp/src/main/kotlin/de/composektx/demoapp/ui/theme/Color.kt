@@ -1,4 +1,4 @@
-package de.composektx.demoapp.theme
+package de.composektx.demoapp.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
