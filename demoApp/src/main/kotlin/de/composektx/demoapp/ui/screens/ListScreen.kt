@@ -9,8 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import de.composektx.demoapp.ui.navigation.NavigationDestination.*
-import de.composektx.demoapp.ui.navigation.toDestination
+import de.composektx.demoapp.ui.navigation.navigateToDetails
 
 @Composable
 fun ListScreen(navHostController: NavHostController) = Column(
@@ -19,13 +18,16 @@ fun ListScreen(navHostController: NavHostController) = Column(
     horizontalAlignment = Alignment.CenterHorizontally
 ) {
     Text(text = "List")
-    Button(onClick = { navHostController.navigateToDetails(1) }) {
+    Button(onClick = { navHostController.navigateToDetails(1, "Hello1") }) {
         Text(text = "Detail-1")
     }
-    Button(onClick = { navHostController.navigateToDetails(2) }) {
+    Button(onClick = { navHostController.navigateToDetails(2, "Hello2", "World") }) {
         Text(text = "Detail-2")
     }
-    Button(onClick = { navHostController.navigateToDetails(3) }) {
+    Button(onClick = { navHostController.navigateToDetails(3, "Hello3", "World", "Mars") }) {
         Text(text = "Detail-3")
+    }
+    Button(onClick = { navHostController.navigateToDetails(4, "Hello4", parameter4 = "Mars") }) {
+        Text(text = "Detail-4")
     }
 }

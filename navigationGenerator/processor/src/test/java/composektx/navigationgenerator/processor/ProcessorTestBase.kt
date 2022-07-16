@@ -5,30 +5,33 @@ import com.tschuchort.compiletesting.SourceFile
 import com.tschuchort.compiletesting.symbolProcessorProviders
 import composektx.navigationgenerator.processor.provider.DestinationAnnotationProcessorProvider
 import org.intellij.lang.annotations.Language
-import org.junit.Assert
-import org.junit.Rule
-import org.junit.rules.TemporaryFolder
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.io.TempDir
 import java.io.File
 
 abstract class ProcessorTestBase {
 
-    @Rule
-    @JvmField
-    var temporaryFolder: TemporaryFolder = TemporaryFolder()
+    @field:TempDir
+    lateinit var tempFolder: File
+
 
     protected fun compile(vararg source: SourceFile) = KotlinCompilation().apply {
         sources = source.toList()
         symbolProcessorProviders = listOf(DestinationAnnotationProcessorProvider())
-        workingDir = temporaryFolder.root
+        workingDir = tempFolder
         inheritClassPath = true
         verbose = true
     }.compile()
 
     protected fun assertSourceEquals(@Language("kotlin") expected: String, actual: String) {
-        val cleanExpected = expected.replace(" ", "").replace("\t", "").trimIndent()
-        val cleanActual = actual.replace(" ", "").replace("\t", "").trimIndent()
+        val cleanExpected = expected.trim().replace(" ", "").replace("\t", "").trimIndent()
+        val cleanActual = actual.trim().replace(" ", "").replace("\t", "").trimIndent()
 
-        Assert.assertEquals(cleanExpected, cleanActual)
+        if (cleanActual == cleanExpected) {
+            assertEquals(cleanExpected, cleanActual)
+        } else {
+            assertEquals(expected, actual)
+        }
     }
 
     protected fun KotlinCompilation.Result.sourceFor(fileName: String) = kspGeneratedSources()
@@ -47,5 +50,6 @@ abstract class ProcessorTestBase {
 
     private val KotlinCompilation.Result.workingDir: File
         get() = checkNotNull(outputDirectory.parentFile)
+
 
 }

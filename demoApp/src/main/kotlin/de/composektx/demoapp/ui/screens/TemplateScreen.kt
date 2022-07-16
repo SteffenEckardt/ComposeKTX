@@ -10,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import de.composektx.demoapp.ui.navigation.NavigationDestination
+import de.composektx.demoapp.ui.navigation.navigateToList
 
 @Composable
 fun TemplateScreen(navController: NavHostController, title: String, navigationDestinationTitle: String, navigationDestination: NavigationDestination) = Column(
@@ -19,7 +20,7 @@ fun TemplateScreen(navController: NavHostController, title: String, navigationDe
 ) {
     Text(text = title)
     Button(onClick = {
-        navController.navigate(navigationDestination.route)
+        navController.navigateToList()
     } ) {
         Text(text = "Go to $navigationDestinationTitle")
     }
